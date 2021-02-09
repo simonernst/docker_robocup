@@ -67,7 +67,30 @@ RUN mkdir -p /openpose/build &&\
 
 RUN rm libcudnn7*
 
+
+
+# -----------------Fix for SM 70 & 75-------------------
+
+# Fix for SM 70 & 75 in the old version of Caffe
+# due to Openpose 1.4.0 branch
+
+# If you have one of the following GPU, it may helps:
+# -Titan V, Tesla V100
+# -GTX 1660Ti, RTX 2060/2070/2080, Titan RTX
+# -Quadro RTX 4000/5000/6000/8000/T1000/T2000/Telsa T4
+
+# Else, if you have a newer one SM 80 or 86, it will stil 
+# an issue
+
+# Otherwise, all older GPU should be supported
+
 ADD Cuda.cmake /openpose/3rdparty/caffe/cmake/Cuda.cmake
+# --------------------------------------------------------
+
+
+
+
+
 
 RUN cd /openpose/build && \
     make -j`nproc`
@@ -75,30 +98,4 @@ RUN cd /openpose/build && \
 ENV OPENPOSE_HOME=/openpose
 
 WORKDIR /openpose
-
-
-# FROM ros:melodic
-
-
-# RUN apt-get update && apt install -y \
-# 	python-catkin-tools \
-# 	ros-${ROS_DISTRO}-cv-bridge \
-# 	ros-${ROS_DISTRO}-vision-opencv \
-# 	ros-melodic-image-transport
-
-# RUN mkdir -p /root/catkin_ws/src && \
-# 	cd /root/catkin_ws/src &&\
-# 	git clone https://github.com/jacques-saraydaryan/ros-openpose &&\
-# 	git clone https://github.com/m0rph03nix/ros_openpose_gossip
-
-# RUN cd /root/catkin_ws/ &&\
-# 	. /opt/ros/${ROS_DISTRO}/setup.sh &&\
-# 	catkin build openpose_ros_msgs  &&\
-# 	catkin build openpose_ros_srvs &&\
-# 	catkin build
-
-
-
-
-
 ENTRYPOINT [ "bash" ]
