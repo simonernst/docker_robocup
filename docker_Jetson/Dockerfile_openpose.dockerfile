@@ -3,9 +3,9 @@ FROM nvcr.io/nvidia/l4t-base:r32.3.1
 ENV DEBIAN_FRONTEND=noninteractive 
 
 RUN apt update && apt upgrade -y &&\
-    apt install libboost-dev libboost-all-dev
+    apt install -y libboost-dev libboost-all-dev
 
-RUN apt install libgflags-dev \
+RUN apt install -y libgflags-dev \
     libgoogle-glog-dev\
     liblmdb-dev\
     libatlas-base-dev\
