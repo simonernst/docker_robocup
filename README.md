@@ -7,6 +7,7 @@ Deploy the [robocup-main](https://github.com/Robocup-Lyontech/robocup-main) repo
 
  * Host machine running on Ubuntu 18.04 on amd64 architecture
  * Dedicated Nvidia GPU with CUDA (>10)
+ * At least 50GB of empty space on Disk (SSD would be a plus)
 
 Cloning the repo :
 ```bash
