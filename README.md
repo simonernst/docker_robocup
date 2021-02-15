@@ -3,46 +3,43 @@
 ## Presentation
 Deploy the [robocup-main](https://github.com/Robocup-Lyontech/robocup-main) repository with Docker.
 
-## Docker openpose
+## Requirements
 
-Dockerfile for building Openpose v1.4.0 
+ * Host machine running on Ubuntu 18.04 on amd64 architecture
+ * Dedicated Nvidia GPU with CUDA (>10)
 
-## Docker robocup
-
-Dockerfile for building robocup-main (on branch dev_palbator_melodic)
-
-## Installation
-
+Cloning the repo :
 ```bash
 git clone https://github.com/simonernst/docker_robocup
 ```
 
-### To build openpose
+### Build Docker Openpose
 
-Before starting the installation, you will need to have a Nvidia Developer Account and be logged in before downloading the files.
+This will build Openpose v1.4.0 required for robocup-main dependenies
 
-Download links for CuDNN 7.6.5 running along CUDA 10.2 : 
+1. Before starting the installation, you will need to have a Nvidia Developer Account and be logged in before downloading the files.
+    Please make sure to have such account before continuing the setup
+    
+2. Download and place the following files in the **docker_openpose** folder. The links are for CuDNN 7.6.5 alongside Cuda 10.2
+ 
+   [libcudnn7.6.5-cuda10.2](https://developer.nvidia.com/compute/machine-learning/cudnn/secure/7.6.5.32/Production/10.2_20191118/Ubuntu18_04-x64/libcudnn7_7.6.5.32-1%2Bcuda10.2_amd64.deb)
 
-[libcudnn7.6.5-cuda10.2](https://developer.nvidia.com/compute/machine-learning/cudnn/secure/7.6.5.32/Production/10.2_20191118/Ubuntu18_04-x64/libcudnn7_7.6.5.32-1%2Bcuda10.2_amd64.deb)
+   [libcudnn7.6.5-dev-cuda10.2](https://developer.nvidia.com/compute/machine-learning/cudnn/secure/7.6.5.32/Production/10.2_20191118/Ubuntu18_04-x64/libcudnn7-dev_7.6.5.32-1%2Bcuda10.2_amd64.deb)
 
-[libcudnn7.6.5-dev-cuda10.2](https://developer.nvidia.com/compute/machine-learning/cudnn/secure/7.6.5.32/Production/10.2_20191118/Ubuntu18_04-x64/libcudnn7-dev_7.6.5.32-1%2Bcuda10.2_amd64.deb)
+   [libcudnn7.6.5-doc-cuda10.2](https://developer.nvidia.com/compute/machine-learning/cudnn/secure/7.6.5.32/Production/10.2_20191118/Ubuntu18_04-x64/libcudnn7-doc_7.6.5.32-1%2Bcuda10.2_amd64.deb)
 
-[libcudnn7.6.5-doc-cuda10.2](https://developer.nvidia.com/compute/machine-learning/cudnn/secure/7.6.5.32/Production/10.2_20191118/Ubuntu18_04-x64/libcudnn7-doc_7.6.5.32-1%2Bcuda10.2_amd64.deb)
+3. Then, from docker_openpose directory, run the command :
+   ```bash
+   docker build -t openpose:latest .
+   ```
 
-*Download and place the previous files in the docker_openpose folder.*
-
-Then, From this directory :
-```bash
-docker build -t openpose:latest .
-```
-
-#### Run
+#### Run Docker Openpose
 If you want to run openpose with the newly created image, use: 
 ```bash
 docker run --gpus all -e DISPLAY=host.docker.internal:0.0 -e LIBGL_ALWAYS_INDIRECT=0 -it openpose:latest
 ```
 
-### To build robocup-main
+### Build Robocup-main
 
 1. Add openpose to a local docker registry
     * Add a local registry: `docker run -d -p 6000:5000 --restart always --name registry registry:2`
@@ -53,6 +50,6 @@ docker run --gpus all -e DISPLAY=host.docker.internal:0.0 -e LIBGL_ALWAYS_INDIRE
     * `docker build -t robocup:latest .` 
   
   
-#### Run instructions
+#### Run Robocup-main
 
 TODO
