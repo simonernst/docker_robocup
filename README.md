@@ -45,12 +45,12 @@ docker run --gpus all -e DISPLAY=host.docker.internal:0.0 -e LIBGL_ALWAYS_INDIRE
 ### To build robocup-main
 
 1. Add openpose to a local docker registry
-  > Add a local registry: `docker run -d -p 6000:5000 --restart always --name registry registry:2`\
-  > Change the tag of openpose: `docker tag openpose:latest localhost:6000/openpose:latest`\
-  > Push openpose to the local registry: `docker push localhost:6000/openpose:latest`
+    * Add a local registry: `docker run -d -p 6000:5000 --restart always --name registry registry:2`
+    * Change the tag of openpose: `docker tag openpose:latest localhost:6000/openpose:latest`
+    * Push openpose to the local registry: `docker push localhost:6000/openpose:latest`
 
-2. Build robocup-main 
-  > `docker build -t robocup:latest .` 
+2. Build robocup-main
+    * `docker build -t robocup:latest .` 
   
   
 #### Run instructions
